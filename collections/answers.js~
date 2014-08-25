@@ -1,0 +1,12 @@
+Answers = new Meteor.Collection("answers", {
+    schema: {
+	answer: {
+	    type: String,
+	    label: "Answer"
+	},
+	team: {
+	    type: String,
+	    label: "Team"
+	}
+    }
+});

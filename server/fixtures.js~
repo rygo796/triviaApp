@@ -1,0 +1,27 @@
+if (Questions.find().count() === 0) {
+    Questions.insert({
+	question: ['The answer is alpha',
+		   'The answer is beta',
+		   'The answer is delta',
+		   'The answer is gamma'],
+	answer: ['alpha',
+		 'beta',
+		 'delta',
+		 'gamma']
+    });
+
+}
+
+if (Answers.find().count() === 0) {
+    Answers.insert({
+	answer: ['Default Answer'],
+	team: 'Team 1'
+    });    
+}
+
+if (Controller.find().count() === 0) {
+    Controller.insert({
+	questionNumber: 1,
+	controlValue: 1
+    });    
+}

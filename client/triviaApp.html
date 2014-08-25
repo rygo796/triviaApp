@@ -1,0 +1,97 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>triviaApp</title>
+</head>
+
+<body>
+{{> bodyTemplate}}
+</body>
+
+<template name="bodyTemplate">
+  {{> loginButtons}}
+  {{#if loggedIn}}
+     {{> contents}}
+     {{#if triviaAdmin}}
+        {{> triviaMaster}}
+     {{/if}}
+  {{/if}}
+
+</template>
+
+<template name="contents">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+	<div class="panel panel-primary" style="text-alignt:center;">
+	  <div class="panel-heading">
+	    <h3 id="QuestionHeader">Question {{questionNumber}}</h3>
+	  </div>
+	  <div class="panel-body">
+	    {{questionController}}
+	    {{#if waiting}}
+	    {{> waitScreen}}
+	    {{else}}
+	    {{> submitAnswer}}
+	    {{/if}}
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="submitAnswer">
+  <legend>{{question}}</legend>
+  <form role="form">
+    <div class="form-group">
+      <label for="answerBox">Answer</label>
+      <input type="input" class="form-control" id="answerBox" placeholder="Answer Here">
+    </div>
+    <div class="btn btn-primary" id="submitAnswer">Submit</div>
+  </form>
+</template>
+
+<template name="waitScreen">
+  <p>Waiting for trivia master</p>
+</template>
+
+<template name="triviaMaster">
+  <h1>Temporary Controller.  This is what the trivia master sees.</h1>
+  <div class="btn btn-warning" id="nextQuestion"> Next Question </div>
+  <div class="btn btn-warning" id="finishRound">Finish Round</div>
+  <table id="manualGrade" class="table">
+    <thead>
+      <tr>
+	<th>Team Name</th>
+	<th>Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each manualGraded}}
+      <tr>
+	<td>{{this.team}}</td>
+	<td>{{this.answer}}</td>
+	<td><div id="acceptAnswer" class="btn btn-primary">Accept</div></td>
+	<td><div id="denyAnswer" class="btn btn-warning">Deny</div></td>
+      </tr>
+      {{/each}} 
+    </tbody>   
+  </table>
+  <table id="scoreboard" class="table table-striped">
+    <thead>
+      <tr>
+	<th>Name</th>
+	<th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each scores}}
+      <tr>
+	<td>{{this.team}}</td>
+	<td>{{this.score}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
